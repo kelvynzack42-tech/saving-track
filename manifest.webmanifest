@@ -1,0 +1,17 @@
+{
+  "id": "./",
+  "name": "SaveTrack — Savings Tracker",
+  "short_name": "SaveTrack",
+  "description": "Track savings goals, deposits, withdrawals, and progress offline.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f5faf7",
+  "theme_color": "#11734d",
+  "categories": ["finance", "productivity", "utilities"],
+  "icons": [
+    {"src": "./icons/savetrack-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "./icons/savetrack-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"}
+  ]
+}

@@ -1,0 +1,1 @@
+@echo off\ncd /d "%~dp0"\necho Starting SaveTrack local test server...\nnpx serve .\npause\n

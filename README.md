@@ -1,41 +1,36 @@
-# SaveTrack Mobile (Installable PWA)
+# SaveTrack — Render-ready deployment
 
-This is the mobile-friendly SaveTrack version for Android phones and iPhone. It reuses the savings tracker interface and adds an installable app shell, offline caching, mobile safe-area handling, and browser notification support where available.
+This package keeps the existing SaveTrack PWA and adds a tiny Node.js static-file server so it can deploy using Render's **Web Service** type.
 
-## Important: publishing is required for installation
-A PWA must be served over **HTTPS** (or localhost for testing). Do not open `index.html` directly from a phone's Files app; installability and offline features may not work.
+## Render settings
 
-## Fast test on your computer
-1. Install Node.js if needed.
-2. Open a terminal in this folder.
-3. Run `npx serve .` (first run may download the tiny server package).
-4. Open the local address shown by the command on your computer to test the page. For phone testing, publish the folder to an HTTPS host or use a secure local testing setup.
+Connect the GitHub repository containing these files at its root, then use:
 
-## Publish for your phone
-Upload the contents of this folder to a static HTTPS host such as GitHub Pages or Netlify. Keep `index.html`, `manifest.webmanifest`, `service-worker.js`, and the `icons` folder together at the same site path.
+- **Service type:** Web Service
+- **Runtime:** Node
+- **Root Directory:** leave blank
+- **Build Command:** `npm install`
+- **Start Command:** `npm start`
 
-## Install on Android
-1. Open the published HTTPS site in Chrome.
-2. Use the browser menu and choose **Install app** or **Add to Home screen**.
-3. Open SaveTrack from the new home-screen icon.
+The project includes `package.json` and `server.js`. The server uses only built-in Node.js modules, so no extra packages are required. Render supplies the listening port through `PORT`.
 
-## Install on iPhone
-1. Open the published HTTPS site in Safari.
-2. Tap **Share**.
-3. Choose **Add to Home Screen**, then tap **Add**.
-4. Open SaveTrack from the home screen.
+## Important when updating GitHub
 
-## Data and security
-- Data stays in the browser storage on that phone. It does **not** automatically sync with the Windows app or another phone.
-- This PWA does not provide server-side account sync or end-to-end encrypted cloud backup.
-- Browser storage is not encrypted by this app. The optional PIN is a convenience lock, not strong encryption.
-- Export JSON backups regularly via Settings → Backup and data. JSON exports are not encrypted; store them securely.
-- Offline page loading is cached after the first successful online load. Browser/OS storage cleanup may remove cached files or app data.
-- Reminder checks run while SaveTrack is open. Browser notifications require permission and support varies by browser/OS. They are not guaranteed to run on a schedule when the app is fully closed, especially on iPhone. This project does not include a push-notification server.
-- SaveTrack does not connect to banks or move money.
+Extract this ZIP and upload/commit the *contents* of `SaveTrack_Render_Fixed` to the top level of the `saving-track` repository. Do not put the files inside an extra nested folder such as `SaveTrack_Mobile_PWA/` or `src/`.
 
-## Files
-- `index.html` — application
-- `manifest.webmanifest` — install metadata
-- `service-worker.js` — offline app-shell cache and notification click handling
-- `icons/` — app icons
+Then in Render:
+1. Open the existing `saving-track` Web Service.
+2. Go to **Settings** and make sure **Root Directory** is blank.
+3. Set Build Command to `npm install`.
+4. Set Start Command to `npm start`.
+5. Save changes and choose **Manual Deploy → Deploy latest commit**.
+
+If you prefer not to replace the repository contents, you can instead set Root Directory to the folder that contains `package.json`.
+
+## PWA installation
+
+After deployment, open the HTTPS Render URL in Chrome (Android) or Safari (iPhone) and use the browser's install/add-to-home-screen option.
+
+## Data note
+
+The existing app stores data in the browser on each device. This deployment fix does not add cross-device cloud sync or a server database.

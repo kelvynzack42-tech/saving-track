@@ -1,0 +1,9 @@
+{
+  "name": "savetrack-mobile-pwa",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SaveTrack installable Progressive Web App",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
